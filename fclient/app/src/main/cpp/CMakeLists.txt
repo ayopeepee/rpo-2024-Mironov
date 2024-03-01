@@ -24,7 +24,7 @@ project("fclient")
 # System.loadLibrary() and pass the name of the library defined here;
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
-add_library(${CMAKE_PROJECT_NAME} SHARED
+add_library(fclient SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
         native-lib.cpp)
 
@@ -33,5 +33,16 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 # build script, prebuilt third-party libraries, or Android system libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
+        android
+        log)
+
+add_library(spdlog STATIC IMPORTED)
+set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
+        C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/build/x86_64/libspdlog.a)
+target_include_directories(spdlog INTERFACE
+        C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/spdlog/include)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        spdlog
         android
         log)
