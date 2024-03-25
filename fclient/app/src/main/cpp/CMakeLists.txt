@@ -24,25 +24,37 @@ project("fclient")
 # System.loadLibrary() and pass the name of the library defined here;
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
-add_library(fclient SHARED
-        # List C/C++ source files with relative paths to this CMakeLists.txt.
+add_library( # Sets the name of the library.
+        native-lib
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
         native-lib.cpp)
 
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
-target_link_libraries(${CMAKE_PROJECT_NAME}
-        # List libraries link to the target library
-        android
-        log)
 
 add_library(spdlog STATIC IMPORTED)
+add_library(mbedcrypto SHARED IMPORTED)
+
 set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
         C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/build/x86_64/libspdlog.a)
+
+set_target_properties(mbedcrypto PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_CURRENT_SOURCE_DIR}/../nativeLibs/${ANDROID_ABI}/libmbedcrypto.so)
+
 target_include_directories(spdlog INTERFACE
         C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/spdlog/include)
 
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(native-lib PUBLIC
+        C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/mbedtls/mbedtls/include)
+
+target_link_libraries(
+        native-lib
         spdlog
         android
+        mbedcrypto
         log)

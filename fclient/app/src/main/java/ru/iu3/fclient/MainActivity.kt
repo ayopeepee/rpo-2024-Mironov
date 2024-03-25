@@ -2,6 +2,7 @@ package ru.iu3.fclient
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import ru.iu3.fclient.databinding.ActivityMainBinding
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
+        Log.d("TAG", "onCreate: ${initRng()} --- ${randomBytes(10)}")
     }
 
     /**
@@ -24,11 +26,14 @@ class MainActivity : AppCompatActivity() {
      * which is packaged with this application.
      */
     external fun stringFromJNI(): String
+    external fun initRng(): Int
+    external fun randomBytes(no: Int): ByteArray
 
     companion object {
         // Used to load the 'fclient' library on application startup.
         init {
-            System.loadLibrary("fclient")
+            System.loadLibrary("native-lib")
+            System.loadLibrary("mbedcrypto")
         }
     }
 }
