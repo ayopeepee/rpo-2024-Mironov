@@ -44,7 +44,7 @@ set_target_properties(spdlog PROPERTIES IMPORTED_LOCATION
         C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/build/x86_64/libspdlog.a)
 
 set_target_properties(mbedcrypto PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/../nativeLibs/${ANDROID_ABI}/libmbedcrypto.so)
+        ${CMAKE_CURRENT_SOURCE_DIR}/../nativeLibs/x86_64/libmbedcrypto.so)
 
 target_include_directories(spdlog INTERFACE
         C:/Users/topde/OneDrive/sturdy/6_semester/rpo/libs/spdlog/include)
@@ -55,6 +55,5 @@ target_include_directories(native-lib PUBLIC
 target_link_libraries(
         native-lib
         spdlog
-        android
         mbedcrypto
         log)

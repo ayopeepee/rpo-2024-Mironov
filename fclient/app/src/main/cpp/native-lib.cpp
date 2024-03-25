@@ -45,7 +45,7 @@ Java_ru_iu3_fclient_MainActivity_randomBytes(JNIEnv *env, jobject thiz, jint no)
 }
 
 extern "C" JNIEXPORT jbyteArray JNICALL
-Java_ru_iu3_fclient_MainActivity_encrypt(JNIEnv *env, jclass, jbyteArray key, jbyteArray data)
+Java_ru_iu3_fclient_MainActivity_encrypt(JNIEnv *env, jobject thiz, jbyteArray key, jbyteArray data)
 {
     jsize ksz = env->GetArrayLength(key);
     jsize dsz = env->GetArrayLength(data);
@@ -78,7 +78,7 @@ Java_ru_iu3_fclient_MainActivity_encrypt(JNIEnv *env, jclass, jbyteArray key, jb
 }
 
 extern "C" JNIEXPORT jbyteArray JNICALL
-Java_ru_iu3_fclient_MainActivity_decrypt(JNIEnv *env, jclass, jbyteArray key, jbyteArray data)
+Java_ru_iu3_fclient_MainActivity_decrypt(JNIEnv *env, jobject thiz, jbyteArray key, jbyteArray data)
 {
     jsize ksz = env->GetArrayLength(key);
     jsize dsz = env->GetArrayLength(data);
