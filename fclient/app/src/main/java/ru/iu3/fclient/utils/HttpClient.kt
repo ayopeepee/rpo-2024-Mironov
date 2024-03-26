@@ -10,7 +10,7 @@ fun testHttpClient(result: (String) -> Unit) {
     Thread {
         try {
             val httpConnection =
-                URL("https://www.wikipedia.org").openConnection() as HttpURLConnection
+                URL("http://10.0.2.2:8081/api/v1/title").openConnection() as HttpURLConnection
             val inputStream = httpConnection.inputStream
             val html = IOUtils.toString(inputStream)
             val title = getPageTitle(html)
