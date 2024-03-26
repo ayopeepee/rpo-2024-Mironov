@@ -13,8 +13,12 @@ import org.apache.commons.codec.binary.Hex
 import ru.iu3.fclient.databinding.ActivityMainBinding
 import ru.iu3.fclient.ui.PinpadActivity
 import ru.iu3.fclient.utils.TransactionEvents
+import ru.iu3.fclient.utils.testHttpClient
 import ru.iu3.fclient.utils.toHex
 import ru.iu3.fclient.utils.toast
+import java.io.BufferedReader
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.Objects
 
 class MainActivity : AppCompatActivity(), TransactionEvents {
@@ -48,8 +52,12 @@ class MainActivity : AppCompatActivity(), TransactionEvents {
     private fun setOnClickListeners() = with(binding) {
         clickMeButton.setOnClickListener {
             //toast(encryptThenDecrypt("0123456789ABCDEF0123456789ABCDE0", "000000000000000102"))
-            val data = "9F0206000000000100".toHex()
-            transaction(data)
+
+            //val data = "9F0206000000000100".toHex()
+            //transaction(data)
+            testHttpClient { title ->
+                runOnUiThread { toast(title) }
+            }
         }
     }
 
