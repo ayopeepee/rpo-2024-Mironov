@@ -7,15 +7,35 @@
     tools:context=".ui.PinpadActivity">
 
     <TextView
+        android:id="@+id/amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/enter_pin_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Сумма: 100.000" />
+
+    <TextView
         android:id="@+id/enter_pin_text"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_pin"
+        app:layout_constraintBottom_toTopOf="@id/attempts_left_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amount_text" />
+
+    <TextView
+        android:id="@+id/attempts_left_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/pin_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/enter_pin_text"
+        tools:text="Осталось две попытки" />
 
     <TextView
         android:id="@+id/pin_text"

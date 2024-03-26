@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import ru.iu3.fclient.MainActivity
 import ru.iu3.fclient.databinding.ActivityPinpadBinding
+import java.text.DecimalFormat
 import kotlin.experimental.and
 
 class PinpadActivity : AppCompatActivity() {
@@ -20,13 +21,18 @@ class PinpadActivity : AppCompatActivity() {
 
         setOnClickListeners()
         shuffleKeys()
+        handleTransaction(
+            intent.getIntExtra("ARG_ATTEMPTS", 0),
+            intent.getStringExtra("ARG_AMOUNT") ?: EMPTY_STRING
+        )
     }
 
     private fun setOnClickListeners() = with(binding) {
         submitButton.setOnClickListener {
-            startActivity(Intent(this@PinpadActivity, MainActivity::class.java).apply {
+            val intent = Intent().apply {
                 putExtra("PIN", currentPin)
-            })
+            }
+            setResult(RESULT_OK, intent)
             finish()
         }
         clearButton.setOnClickListener {
@@ -86,6 +92,15 @@ class PinpadActivity : AppCompatActivity() {
 
         keys.forEachIndexed { index, button ->
             button.text = keyTexts[index]
+        }
+    }
+
+    private fun handleTransaction(attempts: Int, amount: String) = with(binding) {
+        amountText.text = "Сумма: ${DecimalFormat("#,###,###,##0.00").format(amount.toLong())}"
+        attemptsLeftText.text = when (attempts) {
+            2 -> "Осталось две попытки"
+            1 -> "Осталась одна попытка"
+            else -> ""
         }
     }
 
